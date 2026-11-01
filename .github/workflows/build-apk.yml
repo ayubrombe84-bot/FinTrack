@@ -32,7 +32,10 @@ jobs:
 
       - name: Extract FinTrack source
         run: unzip -q FinTrack-Android-Source.zip
-
+      - name: Fix GradientDrawable import
+        run: sed -i '/^package /a import android.graphics.drawable.GradientDrawable;' 
+        FinTrack/app/src/main/java/com/fintrack/app/MainActivity.java
+        
       - name: Set up Gradle 8.7
         uses: gradle/actions/setup-gradle@v4
         with:
